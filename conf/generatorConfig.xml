@@ -14,19 +14,8 @@
              <property name="addRemarkComments" value="true"/><!-- 增加comments -->
          </commentGenerator>
          <!--
-			
-			 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.188:1521:orcl" userId="poc" password="poc">
-			  <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.188:1521:orcl" userId="poc_n" password="poc_n">
-			 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="poc" password="poc">
-
-
-            <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="etl" password="etl">
-
+			 mysql
             <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/xetl?useUnicode=true" userId="root" password="nohi">
-
-          mysql
-		 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/xetl?useUnicode=true" userId="root" password="nohi">
-
 		 -->
          <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.211:1521:orcl" userId="rlis" password="rlis">
          </jdbcConnection>
