@@ -3,26 +3,42 @@
    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
  <generatorConfiguration>
-     <!--　不同数据库需要修改不同驱动jar包 -->
+     
      <classPathEntry    location="ojdbc6-11.2.0.3.jar"/>
      <context id="DB2Tables"    targetRuntime="MyBatis3">
 		 <property name="javaFileEncoding" value="UTF-8"/>
+		 
+		  <!-- 此处是将Mapper.xml改名为UserDao.xml 当然 想改成什么都行~ -->
+         <plugin type="nohi.tools.mybatis.plugin.rename.RenameSqlMapperPlugin">
+             <property name="searchString" value="Mapper" />
+             <property name="replaceString" value="Mapper" />
+         </plugin>
+
+         <!-- 此处是将UserMapper.java改名为UserDao.java 接口 当然 想改成什么都行~  -->
+         <plugin type="nohi.tools.mybatis.plugin.rename.RenameJavaMapperPlugin">
+             <property name="searchString" value="Dao" />
+             <property name="replaceString" value="Mapper" />
+         </plugin>
+		 
          <commentGenerator>
              <property name="suppressDate" value="true"/>
              <property name="suppressAllComments" value="false"/>
 			 <property name="addRemarkComments" value="true"/><!-- 增加comments -->
          </commentGenerator>
          <!--
-            mysql数据连接
+			
+			 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.188:1521:orcl" userId="poc" password="poc">
+			 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="poc" password="poc">
+			 
 			 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.212:3306/xetl?useUnicode=true" userId="root" password="123456">
 		 -->
-		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.211:1521/orcl" userId="rlis_mt" password="rlis_mt">
+		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.211:1521/orcl" userId="jcms" password="jcms">
          </jdbcConnection>
          <javaTypeResolver>
              <property name="forceBigDecimals" value="false"/>
          </javaTypeResolver>
          
-         <javaModelGenerator targetPackage="com.scfsoft.hio.sys.entity.jpa" targetProject="src">
+         <javaModelGenerator targetPackage="com.ccb.jcms.dao.entity.mybatis" targetProject="src">
              <property name="enableSubPackages" value="true"/>
              <property name="trimStrings" value="true"/>
          </javaModelGenerator>
@@ -31,21 +47,17 @@
              <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
         
-         <javaClientGenerator type="XMLMAPPER" targetPackage="com.scfsoft.hio.sys.dao.mybatis" targetProject="src">
+         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ccb.jcms.dao.mybatis" targetProject="src">
              <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
          
-		 <!-- 定制后的table 
-         		原理：oracle不支持catalog
-         		catalog做为过滤表的条件。查询用户catalog下的表。
-         		如果用schema过滤，则会出现，生成的xml文件中，表有schema前缀
-				
-				catalog="etl"
+		 <!--  
+			 tableName可以是%　匹配所有，也可以指定单张表
           -->
-         <table tableName="SYS_CODE" domainObjectName="SysCode" 
+         <table tableName="JCMS_JOBFAIR%" 
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" 
-			selectByExampleQueryId="false" >
+			selectByExampleQueryId="false" enableUpdateByPrimaryKey="false" >
 		 </table>
 		 
      </context>
