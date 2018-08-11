@@ -44,8 +44,12 @@ DatabaseIntrospector.calculatePrimaryKey计算主键
 
 * 生成entity类 TopLevelClass.java
 * 生成字段类 Field.java
+* XMLMapperGenerator.getSqlMapElement 解析生成xml
+* IntrospectedTableMyBatis3Impl.getGeneratedXmlFiles 
 
 ## 修改记录
+* SelectByExampleElementGenerator 根据字段生成select by example
+  SelectByExampleMethodGenerator　dao增加方法
 * 增加生成JPA功能，修改配置文件 config.properties Jpa.flag=true
 * 增加Jpa 字段配置，是否需要在字段上增加@column　：Jpa.field.column.flag
 * 增加是否增加lombok.Getter/Setter注解,增加注解，则不需要生成geeter setter方法: getset.annotation=true
