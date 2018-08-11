@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
  <generatorConfiguration>
      
-     <classPathEntry    location="ojdbc6-11.2.0.3.jar"/>
+     <classPathEntry    location="C:\workspaces-nohi\mybatis-generator\libs\ojdbc6-11.2.0.3.jar"/>
      <context id="DB2Tables"    targetRuntime="MyBatis3">
      	 <property name="javaFileEncoding" value="UTF-8"/>
          <commentGenerator>

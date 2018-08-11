@@ -44,13 +44,7 @@ public class ClassloaderUtility {
 
         if (entries != null) {
             for (String classPathEntry : entries) {
-                if (!classPathEntry.startsWith( "/" )) {
-                    String path3=System.getProperty("user.dir");
-                    System.out.println("user.dir:  " + path3);
-                    file = new File(path3 + "/libs/" + classPathEntry);
-                }else {
-                    file = new File(classPathEntry);
-                }
+                file = new File(classPathEntry);
                 if (!file.exists()) {
                     throw new RuntimeException(getString( "RuntimeError.9", classPathEntry)); //$NON-NLS-1$
                 }
