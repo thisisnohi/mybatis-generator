@@ -49,6 +49,8 @@ DatabaseIntrospector.calculatePrimaryKey计算主键
 * 增加生成JPA功能，修改配置文件 config.properties Jpa.flag=true
 * 增加Jpa 字段配置，是否需要在字段上增加@column　：Jpa.field.column.flag
 * 增加是否增加lombok.Getter/Setter注解,增加注解，则不需要生成geeter setter方法: getset.annotation=true
+* 解决生成的Mapper.xml文件是追加还不是覆盖的问题
+  IntrospectedTableMyBatis3Impl.getGeneratedXmlFiles
 
 20180811 增加打包后目录
 ## 工程打包后目录
