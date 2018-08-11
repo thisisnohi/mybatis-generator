@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.api;
 
+import org.mybatis.generator.PropertiesUtils;
 import org.mybatis.generator.config.Context;
 
 import static org.mybatis.generator.internal.util.EqualsUtil.areEqual;
@@ -262,10 +263,22 @@ public class FullyQualifiedTable {
         if (stringHasValue(domainObjectName)) {
             return domainObjectName;
         } else if (stringHasValue(runtimeTableName)) {
+            String add = PropertiesUtils.getInstance().getConfigValue("entity.add");
+            if (null != add && !add.isEmpty()) {
+                return getCamelCaseString(runtimeTableName, true) + add;
+            }
             return getCamelCaseString(runtimeTableName, true);
         } else {
+            String add = PropertiesUtils.getInstance().getConfigValue("entity.add");
+            if (null != add && !add.isEmpty()) {
+                return getCamelCaseString(introspectedTableName, true) + add;
+            }
             return getCamelCaseString(introspectedTableName, true);
         }
+    }
+
+    public void setDomainObjectName(String domainObjectName) {
+        this.domainObjectName = domainObjectName;
     }
 
     /* (non-Javadoc)

@@ -51,6 +51,11 @@ DatabaseIntrospector.calculatePrimaryKey计算主键
 * 增加是否增加lombok.Getter/Setter注解,增加注解，则不需要生成geeter setter方法: getset.annotation=true
 * 解决生成的Mapper.xml文件是追加还不是覆盖的问题
   IntrospectedTableMyBatis3Impl.getGeneratedXmlFiles
+* 20180811 增加全量表生成java实体，在java实体名增加补充字符串
+  如: sys_user表－> SysUser实体(默认)->SysUserEntity（补充字符串后）
+  配置:config.properties entity.add=Entity
+* 20180811 增加重命令mapper.xml dao.java插件。
+  此内容，参考了 https://blog.csdn.net/bnhjk76/article/details/55099543内容
 
 20180811 增加打包后目录
 ## 工程打包后目录
