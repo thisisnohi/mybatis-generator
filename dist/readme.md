@@ -23,3 +23,4 @@
     * 是否生成支持jpa方法: Jpa.flag=true  
     * Jpa　字段是否需要加上@column注释 Jpa.field.column.flag=false
     * 是否支持lombook注解，如果需要，则不会生成getter setter方法 :  getset.annotation=true
+    * 20190731 config.properties 允许在jar外层配置，优先加载
