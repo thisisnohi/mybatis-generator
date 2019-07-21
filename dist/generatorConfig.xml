@@ -32,7 +32,7 @@
 			 
 			 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.212:3306/xetl?useUnicode=true" userId="root" password="123456">
 		 -->
-		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.211:1521/orcl" userId="jcms" password="jcms">
+		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521/nohi" userId="risk" password="risk">
          </jdbcConnection>
          <javaTypeResolver>
              <property name="forceBigDecimals" value="false"/>
@@ -54,7 +54,7 @@
 		 <!--  
 			 tableName可以是%　匹配所有，也可以指定单张表
           -->
-         <table tableName="JCMS_JOBFAIR%" 
+         <table tableName="SYS_%" 
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" 
 			selectByExampleQueryId="false" enableUpdateByPrimaryKey="false" >

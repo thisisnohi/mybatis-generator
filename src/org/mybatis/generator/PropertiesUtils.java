@@ -1,5 +1,7 @@
 package org.mybatis.generator;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -26,8 +28,16 @@ public class PropertiesUtils {
 
 	public void init() {
 		try {
-			InputStream rs = Thread.currentThread().getContextClassLoader().getResourceAsStream(configfile);
-			properties.load(rs);
+		  InputStream rs = null;
+		  String configFileName = System.getProperty("user.dir")+ File.separator+ configfile;
+		  File file = new File(configFileName);
+		  if (file.exists()){
+			System.out.println("加载:" + file.getAbsolutePath() );
+			rs = new FileInputStream(new File(configFileName));
+		  }else{
+			rs = Thread.currentThread().getContextClassLoader().getResourceAsStream(configfile);
+		  }
+		  properties.load(rs);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
