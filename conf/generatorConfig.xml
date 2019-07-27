@@ -55,6 +55,7 @@
          		如果用schema过滤，则会出现，生成的xml文件中，表有schema前缀
 
          		catalog="etl"
+         		enableSelectByExample="true" 生成 selectByExample Dao方法
           -->
          <table tableName="sys_code"
 			enableCountByExample="false" enableUpdateByExample="false"
