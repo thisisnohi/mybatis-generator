@@ -38,7 +38,7 @@
              <property name="forceBigDecimals" value="false"/>
          </javaTypeResolver>
          
-         <javaModelGenerator targetPackage="com.ccb.jcms.dao.entity.mybatis" targetProject="src">
+         <javaModelGenerator targetPackage="entity" targetProject="src">
              <property name="enableSubPackages" value="true"/>
              <property name="trimStrings" value="true"/>
          </javaModelGenerator>
@@ -47,17 +47,18 @@
              <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
         
-         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ccb.jcms.dao.mybatis" targetProject="src">
+         <javaClientGenerator type="XMLMAPPER" targetPackage="dao" targetProject="src">
              <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
          
 		 <!--  
 			 tableName可以是%　匹配所有，也可以指定单张表
+			 enableUpdateByPrimaryKey 生成updateByPrimaryKeySelective 方法
           -->
-         <table tableName="SYS_%" 
+         <table tableName="SYS_CODE_BASE" domainObjectName="SysCodeBase" 
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" 
-			selectByExampleQueryId="false" enableUpdateByPrimaryKey="false" >
+			selectByExampleQueryId="false" enableUpdateByPrimaryKey="true" >
 		 </table>
 		 
      </context>

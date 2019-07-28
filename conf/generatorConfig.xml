@@ -54,6 +54,7 @@
          		原理：oracle不支持catalog
          		catalog做为过滤表的条件。查询用户catalog下的表。
          		如果用schema过滤，则会出现，生成的xml文件中，表有schema前缀
+         		enableUpdateByPrimaryKey=true 生成updateByPrimaryKeySelective
           -->
          <table tableName="sys_code_base"
 			enableCountByExample="false" enableUpdateByExample="false"
