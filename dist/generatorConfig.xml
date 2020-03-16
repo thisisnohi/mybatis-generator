@@ -3,11 +3,11 @@
    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
  <generatorConfiguration>
-     
+
      <classPathEntry    location="ojdbc6-11.2.0.3.jar"/>
      <context id="DB2Tables"    targetRuntime="MyBatis3">
 		 <property name="javaFileEncoding" value="UTF-8"/>
-		 
+
 		  <!-- 此处是将Mapper.xml改名为UserDao.xml 当然 想改成什么都行~ -->
          <plugin type="nohi.tools.mybatis.plugin.rename.RenameSqlMapperPlugin">
              <property name="searchString" value="Mapper" />
@@ -19,47 +19,52 @@
              <property name="searchString" value="Dao" />
              <property name="replaceString" value="Mapper" />
          </plugin>
-		 
+
          <commentGenerator>
              <property name="suppressDate" value="true"/>
              <property name="suppressAllComments" value="false"/>
 			 <property name="addRemarkComments" value="true"/><!-- 增加comments -->
          </commentGenerator>
          <!--
-			
-			 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.188:1521:orcl" userId="poc" password="poc">
-			 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="poc" password="poc">
-			 
-			 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.212:3306/xetl?useUnicode=true" userId="root" password="123456">
+
+       mysql
+          <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/xetl?useUnicode=true" userId="root" password="123456">
+
+       mysql8
+          <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                       connectionURL="jdbc:mysql://127.0.0.1:3306/nohi?useUnicode=true" userId="root" password="123456">
+            oracle
+       <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                       connectionURL="jdbc:oracle:thin:@127.0.0.1:1521/nohi" userId="risk" password="risk">
 		 -->
-		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521/nohi" userId="risk" password="risk">
+		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521/orcl" userId="risk" password="risk">
          </jdbcConnection>
          <javaTypeResolver>
              <property name="forceBigDecimals" value="false"/>
          </javaTypeResolver>
-         
+
          <javaModelGenerator targetPackage="entity" targetProject="src">
              <property name="enableSubPackages" value="true"/>
              <property name="trimStrings" value="true"/>
          </javaModelGenerator>
-         
+
          <sqlMapGenerator targetPackage="mapping" targetProject="src" >
              <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
-        
+
          <javaClientGenerator type="XMLMAPPER" targetPackage="dao" targetProject="src">
              <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
-         
-		 <!--  
+
+		 <!--
 			 tableName可以是%　匹配所有，也可以指定单张表
 			 enableUpdateByPrimaryKey 生成updateByPrimaryKeySelective 方法
           -->
-         <table tableName="SYS_CODE_BASE" domainObjectName="SysCodeBase" 
+         <table tableName="SYS_CODE_BASE" domainObjectName="SysCodeBase"
 			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false" 
+			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" enableUpdateByPrimaryKey="true" >
 		 </table>
-		 
+
      </context>
  </generatorConfiguration>
