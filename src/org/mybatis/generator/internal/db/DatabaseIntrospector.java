@@ -48,16 +48,16 @@ public class DatabaseIntrospector {
 
     /** The database meta data. */
     private DatabaseMetaData databaseMetaData;
-    
+
     /** The java type resolver. */
     private JavaTypeResolver javaTypeResolver;
-    
+
     /** The warnings. */
     private List<String> warnings;
-    
+
     /** The context. */
     private Context context;
-    
+
     /** The logger. */
     private Log logger;
 
@@ -115,7 +115,7 @@ public class DatabaseIntrospector {
                 keyColumns.put(keySeq, columnName);
                 System.out.println("columnName:" + columnName);
             }
-            
+
             for (String columnName : keyColumns.values()) {
                 introspectedTable.addPrimaryKeyColumn(columnName);
             }
@@ -125,7 +125,7 @@ public class DatabaseIntrospector {
             closeResultSet(rs);
         }
     }
-    
+
     /**
      * Calculate primary key.
      *
@@ -154,7 +154,7 @@ public class DatabaseIntrospector {
                 keyColumns.put(keySeq, columnName);
                 System.out.println("columnName:" + columnName);
             }
-            
+
             for (String columnName : keyColumns.values()) {
                 introspectedTable.addPrimaryKeyColumn(columnName);
             }
@@ -222,7 +222,7 @@ public class DatabaseIntrospector {
                         generatedKey.getColumn(), table.toString()));
             }
         }
-        
+
         for (IntrospectedColumn ic : introspectedTable.getAllColumns()) {
             if (JavaReservedWords.containsWord(ic.getJavaProperty())) {
                 warnings.add(getString("Warning.26", //$NON-NLS-1$
@@ -275,7 +275,7 @@ public class DatabaseIntrospector {
                     && !introspectedTable.hasBaseColumns()) {
                 // add warning that the table has only BLOB columns, remove from
                 // the list
-                String warning = getString("Warning.18", introspectedTable.getFullyQualifiedTable().toString()); //$NON-NLS-1$ 
+                String warning = getString("Warning.18", introspectedTable.getFullyQualifiedTable().toString()); //$NON-NLS-1$
                 warnings.add(warning);
                 iter.remove();
             } else {
@@ -438,7 +438,7 @@ public class DatabaseIntrospector {
             // no generated key, then no identity or sequence columns
             return;
         }
-        
+
         for (Map.Entry<ActualTableName, List<IntrospectedColumn>> entry : columns
                 .entrySet()) {
             for (IntrospectedColumn introspectedColumn : entry.getValue()) {
@@ -454,7 +454,7 @@ public class DatabaseIntrospector {
             }
         }
     }
-    
+
     /**
      * Checks if is matched column.
      *
@@ -524,12 +524,12 @@ public class DatabaseIntrospector {
                     if (columnOverride.isColumnNameDelimited()) {
                         introspectedColumn.setColumnNameDelimited(true);
                     }
-                    
+
                     introspectedColumn.setGeneratedAlways(columnOverride.isGeneratedAlways());
 
                     introspectedColumn.setProperties(columnOverride
                             .getProperties());
-                    
+
                 }
             }
         }
@@ -574,7 +574,11 @@ public class DatabaseIntrospector {
             localTableName = tc.getTableName();
         }
 
-        localCatalog = this.databaseMetaData.getUserName();
+        // 判断是否为mysql
+        // MySQL
+        if (!"MySQL".equalsIgnoreCase(this.databaseMetaData.getDatabaseProductName())) {
+            localCatalog = this.databaseMetaData.getUserName();
+        }
 
         if (tc.isWildcardEscapingEnabled()) {
             String escapeString = databaseMetaData.getSearchStringEscape();
@@ -620,9 +624,9 @@ public class DatabaseIntrospector {
         }else {
         	rs = databaseMetaData.getColumns(localCatalog, localSchema,localTableName, "%"); //$NON-NLS-1$
         }
-        	 
-        
-        
+
+
+
         boolean supportsIsAutoIncrement = false;
         boolean supportsIsGeneratedColumn = false;
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -647,13 +651,13 @@ public class DatabaseIntrospector {
             introspectedColumn.setScale(rs.getInt("DECIMAL_DIGITS")); //$NON-NLS-1$
             introspectedColumn.setRemarks(rs.getString("REMARKS")); //$NON-NLS-1$
             introspectedColumn.setDefaultValue(rs.getString("COLUMN_DEF")); //$NON-NLS-1$
-            
+
             System.out.println("DatabaseIntrospector.introspectedColumn:" + introspectedColumn);
-            
+
             if (supportsIsAutoIncrement) {
                 introspectedColumn.setAutoIncrement("YES".equals(rs.getString("IS_AUTOINCREMENT"))); //$NON-NLS-1$ //$NON-NLS-2$
             }
-            
+
             if (supportsIsGeneratedColumn) {
                 introspectedColumn.setGeneratedColumn("YES".equals(rs.getString("IS_GENERATEDCOLUMN"))); //$NON-NLS-1$ //$NON-NLS-2$
             }
@@ -742,7 +746,7 @@ public class DatabaseIntrospector {
 //                    tc.getProperty(PropertyRegistry.TABLE_RUNTIME_SCHEMA),
 //                    tc.getProperty(PropertyRegistry.TABLE_RUNTIME_TABLE_NAME),
 //                    delimitIdentifiers, context);
-            
+
             FullyQualifiedTable table = null;
             table = new FullyQualifiedTable(
                     stringHasValue(tc.getCatalog()) ? atn.getCatalog() : null,
@@ -754,21 +758,21 @@ public class DatabaseIntrospector {
                     tc.getProperty(PropertyRegistry.TABLE_RUNTIME_SCHEMA),
                     tc.getProperty(PropertyRegistry.TABLE_RUNTIME_TABLE_NAME),
                     delimitIdentifiers, context);
-        
+
             IntrospectedTable introspectedTable = ObjectFactory.createIntrospectedTable(tc, table, context);
 
             for (IntrospectedColumn introspectedColumn : entry.getValue()) {
                 introspectedTable.addColumn(introspectedColumn);
             }
-            
+
             if ((null == tc.getSchema() || "".equals(tc.getSchema())) && null != tc.getCatalog() && !"".equals(tc.getCatalog())) {
             	String catlog = tc.getCatalog().toUpperCase();
             	calculatePrimaryKey(table, introspectedTable,catlog,catlog);
             }else {
             	 calculatePrimaryKey(table, introspectedTable);
             }
-           
-            
+
+
             enhanceIntrospectedTable(introspectedTable);
 
             answer.add(introspectedTable);
@@ -780,9 +784,9 @@ public class DatabaseIntrospector {
     /**
      * This method calls database metadata to retrieve some extra information about the table
      * such as remarks associated with the table and the type.
-     * 
+     *
      * If there is any error, we just add a warning and continue.
-     * 
+     *
      * @param introspectedTable
      */
     private void enhanceIntrospectedTable(IntrospectedTable introspectedTable) {
